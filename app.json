@@ -12,13 +12,15 @@
       "backgroundColor": "#ffffff"
     },
     "updates": {
-      "fallbackToCacheTimeout": 0
+      "fallbackToCacheTimeout": 0,
+      "url": "https://u.expo.dev/b687d148-f504-4049-965e-1ba92fd3f8ea"
     },
     "assetBundlePatterns": [
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.naveedqamar.project"
     },
     "android": {
       "adaptiveIcon": {
@@ -34,6 +36,9 @@
       "eas": {
         "projectId": "b687d148-f504-4049-965e-1ba92fd3f8ea"
       }
+    },
+    "runtimeVersion": {
+      "policy": "sdkVersion"
     }
   }
 }
