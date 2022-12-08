@@ -1,28 +1,53 @@
-// In App.js in a new project
+import React, { Component } from "react";
+import { TextInput, StyleSheet, Text, View } from "react-native";
+import io from "socket.io-client";
 
-import * as React from 'react';
-import { View, Text } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+export default class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      chatMessage: "",
+      chatMessages: []
+    };
+  }
 
-function HomeScreen() {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home Screen</Text>
-    </View>
-  );
+  componentDidMount() {
+    this.socket = io("http://192.168.10.23:3000");
+    this.socket.on("chatmessage", msg => {
+      this.setState({ chatMessages: [...this.state.chatMessages, msg] });
+    });
+  }
+
+  submitChatMessage() {
+    this.socket.emit("chatmessage", this.state.chatMessage);
+    this.setState({ chatMessage: "" });
+  }
+
+  render() {
+    const chatMessages = this.state.chatMessages.map(chatMessage => (
+      <Text key={chatMessage}>{chatMessage}</Text>
+    ));
+
+    return (
+      <View style={styles.container}>
+        <TextInput
+          style={{ height: 40, borderWidth: 2 }}
+          autoCorrect={false}
+          value={this.state.chatMessage}
+          onSubmitEditing={() => this.submitChatMessage()}
+          onChangeText={chatMessage => {
+            this.setState({ chatMessage });
+          }}
+        />
+        {chatMessages}
+      </View>
+    );
+  }
 }
 
-const Stack = createNativeStackNavigator();
-
-function App() {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
-}
-
-export default App;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#F5FCFF"
+  }
+});

@@ -11,9 +11,9 @@ const port = 3000;
 
 io.on("connection", socket => {
   console.log("User Connected");
-  socket.on("Message : ", message => {s
+  socket.on("chatmessage", message => {
     console.log(message);
-    io.emit("Message : ", message);
+    io.emit("chatmessage", message);
   });
 });
 
