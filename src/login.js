@@ -1,8 +1,6 @@
 import React from 'react';
-import {View, Text, Touchable, TouchableOpacity} from 'react-native';
+import {View, Text, Touchable, TouchableOpacity, TextInput} from 'react-native';
 import Background from './background';
-import Btn from './buttonStyle';
-import Field from './field';
 
 const Login = (props) => {
   return (
@@ -61,5 +59,33 @@ const Login = (props) => {
     </Background>
   );
 };
+
+const Field = props => {
+    return (
+      <TextInput
+        {...props}
+        style={{borderRadius: 100, color: '#162e3e', paddingHorizontal: 10, width: '78%', backgroundColor: 'rgb(220,220, 220)', marginVertical: 10}}
+        placeholderTextColor={ '#162e3e' }></TextInput>
+    );
+  };
+
+  function Btn({bgColor, btnLabel, textColor, Press}) {
+    return (
+      <TouchableOpacity
+      onPress={Press}
+        style={{
+          backgroundColor: bgColor,
+          borderRadius: 100,
+          alignItems: 'center',
+          width: 300,
+          paddingVertical: 10,
+          marginVertical: 10
+        }}>
+        <Text style={{color: textColor, fontSize: 25, fontWeight: 'bold'}}>
+          {btnLabel}
+        </Text>
+      </TouchableOpacity>
+    );
+  }
 
 export default Login;
