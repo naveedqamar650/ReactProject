@@ -1,53 +1,20 @@
-import React, { Component } from "react";
-import { TextInput, StyleSheet, Text, View } from "react-native";
-import io from "socket.io-client";
+import * as React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Home from './src/Home';
+import Login from './src/Login';
 
-export default class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      chatMessage: "",
-      chatMessages: []
-    };
-  }
+const Stack = createNativeStackNavigator();
 
-  componentDidMount() {
-    this.socket = io("http://192.168.10.23:3000");
-    this.socket.on("chatmessage", msg => {
-      this.setState({ chatMessages: [...this.state.chatMessages, msg] });
-    });
-  }
-
-  submitChatMessage() {
-    this.socket.emit("chatmessage", this.state.chatMessage);
-    this.setState({ chatMessage: "" });
-  }
-
-  render() {
-    const chatMessages = this.state.chatMessages.map(chatMessage => (
-      <Text key={chatMessage}>{chatMessage}</Text>
-    ));
-
-    return (
-      <View style={styles.container}>
-        <TextInput
-          style={{ height: 40, borderWidth: 2 }}
-          autoCorrect={false}
-          value={this.state.chatMessage}
-          onSubmitEditing={() => this.submitChatMessage()}
-          onChangeText={chatMessage => {
-            this.setState({ chatMessage });
-          }}
-        />
-        {chatMessages}
-      </View>
-    );
-  }
+function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="Login" component={Login} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#F5FCFF"
-  }
-});
+export default App;
