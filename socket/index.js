@@ -15,6 +15,10 @@ io.on("connection", socket => {
     console.log(message);
     io.emit("chatmessage", message);
   });
+  // socket.on("Message : ", message => {s
+  //   console.log(message);
+  //   io.emit("Message : ", message);
+  // });
 });
 
 server.listen(
