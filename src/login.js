@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {View, Text, Touchable, TouchableOpacity, TextInput, StyleSheet, ImageBackground} from 'react-native';
+import {View, Text, TouchableOpacity, TextInput, StyleSheet, ImageBackground} from 'react-native';
 
 const Login = (props) => {
     const [userName, setuserName] = useState("");      
