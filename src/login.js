@@ -8,6 +8,8 @@ const Login = (props) => {
     const submit = () =>{
         if (userName === "Naveed" && Password === "Admin123"){
             props.navigation.navigate("ChatPage");
+            setuserName("");
+            setPassword("");
         }else{
             setuserName("");
             setPassword("");
