@@ -1,7 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {View, Text, Touchable, TouchableOpacity, TextInput, StyleSheet, ImageBackground} from 'react-native';
 
 const Login = (props) => {
+    const [userName, setuserName] = useState("");      
+    const [Password, setPassword] = useState("");      
+
+    const submit = () =>{
+        if (userName === "Naveed" && Password === "Admin123"){
+            props.navigation.navigate("ChatPage");
+        }else{
+            setuserName("");
+            setPassword("");
+        }
+    }
+    
   return (
       <View style={styles.mainView}>
         <View style={styles.TopView}>
@@ -24,15 +36,21 @@ const Login = (props) => {
           <Field
             placeholder="Email / Username"
             keyboardType={'email-address'}
+            value={userName}
+            onChangeText={(actualData) => setuserName(actualData)}
           />
-          <Field placeholder="Password" secureTextEntry={true} />
+          <Field 
+            placeholder="Password" secureTextEntry={true} 
+            value={Password}
+            onChangeText={(actualData) => setPassword(actualData)}
+          />
           <View
             style={{alignItems: 'flex-end', width: '97%', paddingRight: 16, marginBottom: 50}}>
             <Text style={{color: '#162e3e', fontWeight: 'bold', fontSize: 16}}>
               Forgot Password ?
             </Text>
           </View>
-          <Btn textColor='white' bgColor={'#162e3e'} btnLabel="Login" Press={() => alert("Logged In")} />
+          <Btn textColor='white' bgColor={'#162e3e'} btnLabel="Login" Press={() => submit()} />
         </View>
       </View>
   );
