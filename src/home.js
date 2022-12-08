@@ -34,6 +34,7 @@ function Btn({bgColor, btnLabel, textColor, Press}) {
     );
   }
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+})
 
 export default Home;
